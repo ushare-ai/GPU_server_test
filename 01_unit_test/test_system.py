@@ -1,5 +1,7 @@
 import torch
 import psutil
+import os
+import subprocess
 
 CPU_CORE_PER_GPU = 8
 DRAM_PER_GPU = 48
@@ -34,3 +36,10 @@ def test_gpu_memory():
         gpu_mem = torch.cuda.get_device_properties(i).total_memory
         # estimate 6G GPU MEM
         assert gpu_mem >= GPU_MEMORY * 1000 * 1000 * 1000
+
+def test_fake_display():
+    p = os.popen('nvidia-xconfig --query-gpu-info | grep -E "Display Device|UUID"') 
+    x = p.read()
+    p.close()
+    assert 'Number of Display Devices: 0' not in x
+    assert 'Number of Display Devices: 1' in x
