@@ -38,7 +38,8 @@ precisions=["float"]
 
 WARM_UP = 5
 NUM_TEST = 50
-BATCH_SIZE = 6
+BATCH_SIZE = 4
+NUM_WORKERS = 2
 NUM_CLASSES = 1000
 NUM_GPU = torch.cuda.device_count()
 folder = 'result'
@@ -48,7 +49,7 @@ BATCH_SIZE*=NUM_GPU
 folder_name=folder
 
 rand_loader = DataLoader(dataset=RandomDataset(BATCH_SIZE*(WARM_UP + NUM_TEST)),
-                        batch_size=BATCH_SIZE, shuffle=False,num_workers=8)
+                        batch_size=BATCH_SIZE, shuffle=False, num_workers=NUM_WORKERS)
 
 def train(precision='single'):
     """use fake image for training speed test"""
