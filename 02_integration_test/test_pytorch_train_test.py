@@ -31,6 +31,7 @@ def test_training_each_card():
         out = model(a)
         criterion = torch.nn.CrossEntropyLoss()
         loss = criterion(out, b)
+        loss.backward()
         optimizer.step()
 
 
@@ -44,6 +45,7 @@ def test_training_dp():
     out = model(a)
     criterion = torch.nn.CrossEntropyLoss()
     loss = criterion(out, b)
+    loss.backward()
     optimizer.step()
 
 
@@ -57,4 +59,5 @@ def test_training_dp():
     out = model(a)
     criterion = torch.nn.CrossEntropyLoss()
     loss = criterion(out, b)
+    loss.backward()
     optimizer.step()
